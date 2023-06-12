@@ -52,7 +52,7 @@ def get_problem_info(workbook_url):
 CATEGORY = ["연습 문제", "기본 문제✔", "기본 문제", "응용 문제✔", "응용 문제"]
 
 
-# gen 0x00.md to 0x??.md, proper prob_id.cpp for each solution directory
+# gen 0x00.md to 0x??.md, proper prob_id.py for each solution directory
 def gen_ind_workbook(attrs, category):
     txt = """import sys
 input = sys.stdin.readline
@@ -80,11 +80,11 @@ input = sys.stdin.readline
                 prob_table += f"| {CATEGORY[category_idx]} | {prob_id} | [{prob_name}](https://www.acmicpc.net/problem/{prob_id}) | - |\n"
             else:
                 solution_num += 1
-                code_attr = f'[정답 코드]({file_path.replace(" ", "%20")}.cpp)'
+                code_attr = f'[정답 코드]({file_path.replace(" ", "%20")}.py)'
                 MAX_DIFFERENT_SOLUTION = 9
                 for i in range(1, MAX_DIFFERENT_SOLUTION + 1):
-                    if os.path.exists(file_path + "_" + str(i) + ".cpp"):
-                        code_attr += f", [별해 {i}]({file_path+'_'+str(i)+'.cpp'})"
+                    if os.path.exists(file_path + "_" + str(i) + ".py"):
+                        code_attr += f", [별해 {i}]({file_path+'_'+str(i)+'.py'})"
                 prob_table += f"| {CATEGORY[category_idx]} | {prob_id} | [{prob_name}](https://www.acmicpc.net/problem/{prob_id}) | {code_attr} |\n"
         with open(attr[0] + ".md", "w", encoding="UTF-8") as f:
             # progress bar
